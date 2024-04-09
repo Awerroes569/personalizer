@@ -4,6 +4,8 @@ import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import shortid from 'shortid';
+import OptionColor from '../OptionColor/OptionColor';
+import OptionSize from '../OptionSize/OptionSize';
 
 
 const ProductForm = props => {
@@ -45,18 +47,9 @@ const ProductForm = props => {
           <span className={styles.price}>Price: {currentPrice}$</span>
         </header>
         <form>
-          <div className={styles.sizes}>
-          <h3 className={styles.optionLabel}>Sizes</h3>
-          <ul className={styles.choices}>           
-              {props.sizes.map(size => (<li key={shortid.generate()}><button type="button" addprice={size.additionalPrice} className={activeSize===size.name?styles.active:undefined} onClick={changeActiveSize}>{size.name}</button></li>))}
-          </ul>
-          </div>
-          <div className={styles.colors}>
-          <h3 className={styles.optionLabel}>Colors</h3>
-          <ul className={styles.choices}>
-              {props.colors.map(item => (<li key={shortid.generate()}><button type="button" color={item} className={clsx(prepareColorClassName(item), item ===props.activecolor?styles.active:undefined)} onClick={props.changecolor}/></li>))}
-          </ul>
-          </div>
+          
+          <OptionSize sizes={props.sizes} activesize={activeSize} changesize={changeActiveSize}/>
+          <OptionColor colors={props.colors} activecolor={props.activecolor} changecolor={props.changecolor}/>
           <Button action={reportProductParams} className={styles.button}>
           <span className="fa fa-shopping-cart" />
           </Button>
