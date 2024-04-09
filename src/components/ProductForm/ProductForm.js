@@ -34,7 +34,7 @@ const ProductForm = props => {
             {props.title}
           </h2>
           <span className={styles.price}>
-            Price: 
+            Price:&nbsp; 
           {currentPrice}$</span>
         </header>
         <form>

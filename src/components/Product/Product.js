@@ -1,9 +1,6 @@
 import styles from './Product.module.scss';
-import clsx from 'clsx';
-import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import shortid from 'shortid';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductForm from '../ProductForm/ProductForm';
 
@@ -13,16 +10,6 @@ const Product = props => {
   const [activeColor, setActiveColor] = useState(props.colors[0]);
   const [basePrice, setBasePrice] = useState(props.basePrice);
   const [currentPrice, setCurrentPrice] = useState(basePrice+props.sizes[0].additionalPrice);
-
-  const prepareColorClassName = color => {
-    return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
-  }
-
-  const changeActiveSize = e => {
-    e.preventDefault();
-    setActiveSize(e.target.innerText);
-    setCurrentPrice(basePrice+parseInt(e.target.getAttribute('addprice')));
-  }
 
   const changeActiveColor = e => {
     e.preventDefault();
@@ -38,9 +25,20 @@ const Product = props => {
 
   return (
     <article className={styles.product}>
-      <ProductImage name={props.name} color={activeColor} title={props.title} />
-      
-      <ProductForm title={props.title} baseprice={props.basePrice} colors={props.colors} report={reportProductParams} changecolor={changeActiveColor} activecolor={activeColor} sizes={props.sizes} />
+      <ProductImage
+        name={props.name}
+        color={activeColor}
+        title={props.title}
+      />   
+      <ProductForm
+        title={props.title}
+        baseprice={props.basePrice}
+        colors={props.colors}
+        report={reportProductParams}
+        changecolor={changeActiveColor}
+        activecolor={activeColor}
+        sizes={props.sizes}
+      />
       
     </article>
   )
