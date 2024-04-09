@@ -4,8 +4,6 @@ import propTypes from 'prop-types';
 
 const OptionSize = (props) => {
 
-    const allStyles = [styles.sizes, styles.choices, styles.optionLabel, styles.active];
-
     return (
         <div className={styles.sizes}>
           <h3 className={styles.optionLabel}>Sizes</h3>
