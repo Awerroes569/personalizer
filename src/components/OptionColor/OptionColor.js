@@ -13,7 +13,16 @@ const OptionColor = (props) => {
         <div>
         <h3 className={styles.optionLabel}>Colors</h3>
         <ul className={styles.choices}>
-            {props.colors.map(item => (<li key={shortid.generate()}><button type="button" color={item} className={clsx(prepareColorClassName(item), item ===props.activecolor?styles.active:undefined)} onClick={props.changecolor}/></li>))}
+            {props.colors.map(item => (
+                <li key={shortid.generate()}>
+                    <button
+                        type="button"
+                        color={item}
+                        className={clsx(prepareColorClassName(item), item ===props.activecolor?styles.active:undefined)}
+                        onClick={props.changecolor}
+                    />
+                </li>)
+            )}
         </ul>
         </div>
     )

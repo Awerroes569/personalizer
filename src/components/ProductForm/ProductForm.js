@@ -1,9 +1,7 @@
 import styles from './ProductForm.module.scss';
-import clsx from 'clsx';
-import Button from '../Button/Button';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import shortid from 'shortid';
+import Button from '../Button/Button';
 import OptionColor from '../OptionColor/OptionColor';
 import OptionSize from '../OptionSize/OptionSize';
 
@@ -15,18 +13,12 @@ const ProductForm = props => {
     const [basePrice, setBasePrice] = useState(props.baseprice);
     const [currentPrice, setCurrentPrice] = useState(basePrice+props.sizes[0].additionalPrice);
   
-    const prepareColorClassName = color => {
-      return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
-    }
-  
     const changeActiveSize = e => {
       e.preventDefault();
       setActiveSize(e.target.innerText);
       setCurrentPrice(basePrice+parseInt(e.target.getAttribute('addprice')));
     }
 
-    
-  
     const reportProductParams = () => {
       console.log(`Product: ${props.title}`);
       console.log(`Size: ${activeSize}`);
@@ -34,24 +26,34 @@ const ProductForm = props => {
       console.log(`Price: ${currentPrice}`);
     }
 
-    const changeActiveColor = e => {
-      e.preventDefault();
-      setActiveColor(e.target.getAttribute('color'));
-    }
-
     return (
 
       <div>
         <header>
-          <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {currentPrice}$</span>
+          <h2 className={styles.name}>
+            {props.title}
+          </h2>
+          <span className={styles.price}>
+            Price: 
+          {currentPrice}$</span>
         </header>
         <form>
           
-          <OptionSize sizes={props.sizes} activesize={activeSize} changesize={changeActiveSize}/>
-          <OptionColor colors={props.colors} activecolor={props.activecolor} changecolor={props.changecolor}/>
-          <Button action={reportProductParams} className={styles.button}>
-          <span className="fa fa-shopping-cart" />
+          <OptionSize
+            sizes={props.sizes}
+            activesize={activeSize}
+            changesize={changeActiveSize}
+          />
+          <OptionColor
+            colors={props.colors}
+            activecolor={props.activecolor}
+            changecolor={props.changecolor}
+          />
+          <Button
+            action={reportProductParams}
+            className={styles.button}
+          >
+            <span className="fa fa-shopping-cart" />
           </Button>
         </form>
       </div>

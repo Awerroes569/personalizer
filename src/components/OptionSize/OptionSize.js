@@ -8,7 +8,20 @@ const OptionSize = (props) => {
         <div className={styles.sizes}>
           <h3 className={styles.optionLabel}>Sizes</h3>
           <ul className={styles.choices}>           
-              {props.sizes.map(size => (<li key={shortid.generate()}><button type="button" addprice={size.additionalPrice} className={props.activesize===size.name?styles.active:undefined} onClick={props.changesize}>{size.name}</button></li>))}
+                {props.sizes.map(size => 
+                    (
+                        <li key={shortid.generate()}>
+                            <button
+                                type="button"
+                                addprice={size.additionalPrice}
+                                className={props.activesize===size.name?styles.active:undefined}
+                                onClick={props.changesize}
+                            >
+                                {size.name}
+                            </button>
+                        </li>
+                    ))
+                }
           </ul>
         </div>
     )
