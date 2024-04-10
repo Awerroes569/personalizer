@@ -9,12 +9,12 @@ const Product = props => {
   const [activeColor, setActiveColor] = useState(props.colors[0]);
 
   const changeActiveColor = useCallback(
-      e => {
+    e => {
       e.preventDefault();
       setActiveColor(e.target.getAttribute('color'));
-      },
-      []
-    );
+    },
+    []
+  );
   
 
   return (

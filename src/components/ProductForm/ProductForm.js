@@ -1,6 +1,6 @@
 import styles from './ProductForm.module.scss';
 import PropTypes from 'prop-types';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import Button from '../Button/Button';
 import OptionColor from '../OptionColor/OptionColor';
 import OptionSize from '../OptionSize/OptionSize';
@@ -11,24 +11,25 @@ const ProductForm = props => {
     const [activeSize, setActiveSize] = useState(props.sizes[0].name);
     const [basePrice, setBasePrice] = useState(props.baseprice);
     const [currentPrice, setCurrentPrice] = useState(basePrice+props.sizes[0].additionalPrice);
-  
+
+
     const changeActiveSize = useCallback(
       e => {
-      e.preventDefault();
-      setActiveSize(e.target.innerText);
-      setCurrentPrice(basePrice+parseInt(e.target.getAttribute('addprice')));
+        e.preventDefault();
+        setActiveSize(e.target.innerText);
+        setCurrentPrice(basePrice+parseInt(e.target.getAttribute('addprice')));
       },
       [basePrice]
     );
 
-    const reportProductParams = useMemo(
+    const reportProductParams = useCallback(
       () => {
       console.log(`Product: ${props.title}`);
       console.log(`Size: ${activeSize}`);
-      console.log(`Color: ${props.additionalPriceactiveColor}`);
+      console.log(`Color: ${props.activecolor}`);
       console.log(`Price: ${currentPrice}`);
       },
-      [props.title, activeSize, props.additionalPriceactiveColor, currentPrice]
+      [props.title, activeSize, props.activecolor, currentPrice]
     );
     return (
 
