@@ -1,6 +1,6 @@
 import styles from './ProductForm.module.scss';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import Button from '../Button/Button';
 import OptionColor from '../OptionColor/OptionColor';
 import OptionSize from '../OptionSize/OptionSize';
@@ -9,23 +9,27 @@ import OptionSize from '../OptionSize/OptionSize';
 const ProductForm = props => {
 
     const [activeSize, setActiveSize] = useState(props.sizes[0].name);
-    const [activeColor, setActiveColor] = useState(props.colors[0]);
     const [basePrice, setBasePrice] = useState(props.baseprice);
     const [currentPrice, setCurrentPrice] = useState(basePrice+props.sizes[0].additionalPrice);
   
-    const changeActiveSize = e => {
+    const changeActiveSize = useCallback(
+      e => {
       e.preventDefault();
       setActiveSize(e.target.innerText);
       setCurrentPrice(basePrice+parseInt(e.target.getAttribute('addprice')));
-    }
+      },
+      [basePrice]
+    );
 
-    const reportProductParams = () => {
+    const reportProductParams = useMemo(
+      () => {
       console.log(`Product: ${props.title}`);
       console.log(`Size: ${activeSize}`);
-      console.log(`Color: ${activeColor}`);
+      console.log(`Color: ${props.additionalPriceactiveColor}`);
       console.log(`Price: ${currentPrice}`);
-    }
-
+      },
+      [props.title, activeSize, props.additionalPriceactiveColor, currentPrice]
+    );
     return (
 
       <div>
@@ -63,7 +67,6 @@ const ProductForm = props => {
       title: PropTypes.string.isRequired,
       baseprice: PropTypes.number.isRequired,
       colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-      report: PropTypes.func.isRequired,
       changecolor: PropTypes.func.isRequired,
       sizes: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
