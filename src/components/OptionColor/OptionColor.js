@@ -2,12 +2,12 @@ import styles from './OptionColor.module.scss';
 import shortid from 'shortid';
 import propTypes from 'prop-types';
 import clsx from 'clsx';
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 
 const OptionColor = (props) => {
 
-    const prepareColorClassName = useCallback(
+    const prepareColorClassName = useMemo(
         color => {
         return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
         },
